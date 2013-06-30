@@ -27,6 +27,28 @@ minetest.register_craft({
 	},
 })
 
+minetest.register_node("lessblocks:gold_brick", {
+	description = "Gold Brick",
+	tiles = {"lessblocks_gold_brick.png"},
+	paramtype = "light",
+	light_source = 14,
+	groups = {cracky=3},
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_craft({
+	output = '"lessblocks:gold_brick" 2',
+	recipe = {
+		{"","default:gold_ingot",""},
+		{"default:gold_ingot","lessblocks:glowing_dust","default:gold_ingot"},
+		{"","default:gold_ingot",""},
+	}
+})
+minetest.register_craft({
+	type = "shapeless",
+	output = '"default:gold_ingot" 2',
+	recipe = {"lessblocks:gold_brick"},
+})
+
 -- Carved stone
 minetest.register_node("lessblocks:carved_stone", {
 	description = "Carved Stone",
@@ -60,4 +82,60 @@ minetest.register_craft({
 })
 
 mortar_pestle.register_recipe("lessblocks:carved_stone","default:cobble")
+
+-- Faience
+minetest.register_craftitem("lessblocks:faience_lump", {
+	description = "Faience lump",
+	inventory_image = "lessblocks_faience_lump.png",
+})
+minetest.register_craft({
+	type = "shapeless",
+	output = '"lessblocks:faience_lump" 3',
+	recipe = {"default:clay_lump","default:clay_lump","default:iron_lump"},
+})
+minetest.register_node("lessblocks:uncooked_tile", {
+	description = "Uncooked Tile",
+	tiles = {"lessblocks_uncooked_tile.png"},
+	inventory_image = "lessblocks_uncooked_tile_inv.png",
+	wield_image = "lessblocks_uncooked_tile.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	drawtype = "nodebox",
+	node_box = {
+		type = "wallmounted",
+		wall_top = {-.5,7/16,-.5, .5,.5,.5},
+		wall_bottom = {-.5,-.5,-.5, -7/16,.5,.5},
+		wall_bottom = {-.5,-.5,-.5, .5,-7/16,.5},
+	},
+	sunlight_propagates=true,
+	groups = {crumbly=2,attached_node=1},
+	sounds = default.node_sound_dirt_defaults(),
+})
+minetest.register_craft({
+	output = "lessblocks:uncooked_tile",
+	recipe = {{"lessblocks:faience_lump","lessblocks:faience_lump","lessblocks:faience_lump"}},
+})
+minetest.register_node("lessblocks:tile", {
+	description = "Tile",
+	tiles = {"lessblocks_tile.png"},
+	inventory_image = "lessblocks_tile_inv.png",
+	wield_image = "lessblocks_tile.png",
+	paramtype = "light",
+	paramtype2 = "wallmounted",
+	drawtype = "nodebox",
+	node_box = {
+		type = "wallmounted",
+		wall_top = {-.5,7/16,-.5, .5,.5,.5},
+		wall_bottom = {-.5,-.5,-.5, -7/16,.5,.5},
+		wall_bottom = {-.5,-.5,-.5, .5,-7/16,.5},
+	},
+	sunlight_propagates=true,
+	groups = {cracky=3,attached_node=1},
+	sounds = default.node_sound_stone_defaults(),
+})
+minetest.register_craft({
+	type = "cooking",
+	output = "lessblocks:tile",
+	recipe = "lessblocks:uncooked_tile",
+})
 
